@@ -1,0 +1,78 @@
+<?
+require_once(ROOT_PATH."/module/".$currmodule->name."/include/DifferenceEngine.php");
+
+$wiki_bbcode = array(
+	"/\[b\](.*?)\[\/b\]/is",
+	"/\[i\](.*?)\[\/i\]/is",
+	"/\[u\](.*?)\[\/u\]/is",
+	"/\[url\=(.*?)\](.*?)\[\/url\]/is",
+	"/\[url\](.*?)\[\/url\]/is",
+	"/\[img\](.*?)\[\/img\]/is"
+	);
+
+$wiki_htmlcode = array(
+	"<strong>$1</strong>",
+	"<em>$1</em>",
+	"<u>$1</u>",
+	"<a href=\"$1\">$2</a>",
+	"<a href=\"$1\">$1</a>",
+	"<img src=\"$1\" />"
+	);
+
+function wikifilter($content)
+{
+	return $content;
+}
+
+function wikidiff($from, $to)
+{
+	$from = explode("\n", htmlencode($from));
+
+	$to = explode("\n", htmlencode($to));
+
+	$f_len = count($from);
+
+	$t_len = count($to);
+
+	$df = new Diff($from, $to);
+
+	$i = ($f_len > $t_len) ? $f_len : $t_len;
+
+	$tdf = new TableDiffFormatter();
+	$tdf->format($df);
+
+	for ($i--;$i >= 0;$i--)
+	{
+		if ($i < $f_len)
+			$from[$i] = trim($from[$i]);
+		if ($i < $t_len)
+			$to[$i] = trim($to[$i]);
+	}
+
+	$result = 0;
+
+	foreach ($tdf->block as $op)
+	{
+//		echo get_class($op);
+		echo "(".$op->type.")".$op->orig[0]."::".$op->closing[0]."<br />\n";
+
+		if ($op->type == "copy")
+;//			continue;
+		else if ($op->type == "add" && !in_array(trim($op->closing[0]), $from))
+			$result += 1 + strlen($op->closing[0]);
+		else if ($op->type == "delete" && !in_array(trim($op->orig[0]), $to))
+			$result += 1 + strlen($op->orig[0]);
+		else if ($op->type == "change")
+		{
+			if ($op->closing[0] && in_array(trim($op->closing[0]), $from))
+				continue;
+			else if ($op->orig[0] && in_array(trim($op->orig[0]), $to))
+				continue;
+			else
+				$result += 1 + abs(strlen(trim($op->orig[0])) - strlen(trim($op->closing[0])));
+		}
+	}
+
+	return $result;
+}
+?> 

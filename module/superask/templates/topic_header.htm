@@ -1,0 +1,17 @@
+<{if ($_WikiPost->pno != $_WikiTopic->currpost->pno || !$wikiview)}>
+<div style="margin-bottom: 10px; text-align: right;">
+
+<{if ($_WikiPost->pno != $_WikiTopic->currpost->pno)}>
+  <b>您目前<{if ($wikiview)}>瀏覽<{else}>編輯<{/if}>的文章不是最新的版本</b>
+<{if ($wikiedit)}>
+  <a href="javascript: document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/view.php?pno=<{$_WikiTopic->currpost->pno}>'" title="目前版本" class="topic_manage">目前版本</a>
+<{/if}>
+<{/if}>
+
+<{if (!$wikiview)}>
+  <a href="javascript: document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/view.php?pno=<{$_WikiPost->pno}>'" title="觀看資訊" class="topic_manage">觀看資訊</a>
+<{/if}>
+
+</div>
+<{/if}>
+

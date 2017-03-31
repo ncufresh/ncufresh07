@@ -1,0 +1,26 @@
+<style type="text/css">
+.field_content a
+{
+	text-decoration: none;
+}
+</style>
+
+<p class="field_top"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_mailicon.jpg" alt="傳訊息" /></p>
+<div class="field_content">
+  <table border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse" align="center" width="500">
+    <tr>
+      <th colspan="2" style="font-size:18px;"><{$title}></th>
+    </tr>
+    <tr>
+      <td>寄件者：<{$sender_id}></td>
+      <td align="right"><{$time}></td>
+    </tr>
+    <tr>
+      <td colspan="2"><{$content}></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="right"><a href="javascript: history.go(-1);" title="上一頁">回到上頁</a>&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/msgsend.php?msgreply=1&title=Re:<{$title|urlencode}>&fno=<{$sender_no}>" title="回覆留言">回覆</a>&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/msgbox_do.php?msgdel=1&mno=<{$mno}>" title="刪除留言">刪除</a></td>
+    </tr>
+  </table>
+</div>
+<p class="field_bottom"></p>

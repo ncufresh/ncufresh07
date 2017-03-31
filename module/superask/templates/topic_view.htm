@@ -1,0 +1,255 @@
+<script type="text/javascript">
+<{if (!$curruser->isguest())}>
+	function subscribe(type, no)
+	{
+		var parms = 'subscr_' + type + '=1&no=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_subscribe.php", {method: "post", parameters: parms, onComplete: function(q){alert('訂閱成功');}});
+	}
+<{/if}>
+<{if ($_WikiPost->pno == $_WikiTopic->currpost->pno && $curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+	var qi = 0;
+
+	function show_qform(id)
+	{
+		if (qi > 0)
+			$('ans_' + qi).style.display = 'none';
+
+		$('ans_' + id).style.display = 'block';
+
+		qi = id;
+	}
+
+	function show_form(name)
+	{
+		if ($(name).style.display == 'none')
+			new Effect.SlideDown($(name));
+	}
+<{/if}>
+</script>
+
+<{if ($_WikiPost->pno == $_WikiTopic->currpost->pno)}>
+<div id="comment_form" style="display: none;">
+<{if ($_WikiTopic->unlock($LOCK_COMM))}>
+  <form action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php" method="post">
+    <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;" align="center">
+      <tr>
+        <th>發表評論</th>
+      </tr>
+      <tr>
+        <td><textarea id="comment" name="comment" rows="5" cols="25"></textarea></td>
+      </tr>
+      <tr>
+        <td align="right"><input type="hidden" name="docomment" value="1" /><input type="hidden" name="tno" value=<{$_WikiTopic->tno}>" /><input type="submit" value="送出" />&nbsp;<input type="button" value="取消" onclick="javascript: new Effect.SlideUp($('comment_form')); $('comment').value='';" /></td>
+      </tr>
+    </table>
+  </form>
+<{else}>
+  此主題已被鎖定&nbsp;&nbsp;
+  <input type="button" value="確定" onclick="javascript: new Effect.SlideUp($('comment_form')); $('comment').value='';" />
+<{/if}>
+  <p class="topic_form_bottom"></p>
+</div>
+<div id="qanda_form" style="display: none;">
+<{if ($_WikiTopic->unlock($LOCK_QUES))}>
+  <form action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_question.php" method="post">
+    <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+      <tr>
+        <th>發表問題</th>
+      </tr>
+      <tr>
+        <td><textarea id="question" name="question" rows="5" cols="25"></textarea></td>
+      </tr>
+      <tr>
+        <td>相關主題 <input type="text" id="ref" name="ref" value="<{$_WikiTopic->title}>," size="20"></td>
+      </tr>
+      <tr>
+        <td align="right"><input type="hidden" name="doask" value="1" /><input type="submit" value="送出" />&nbsp;<input type="button" value="取消" onclick="javascript: new Effect.SlideUp($('qanda_form')); $('question').value=''; $('ref').value='<{$_WikiTopic->title}>,';" /></td>
+      </tr>
+    </table>
+  </form>
+<{else}>
+  此主題已被鎖定&nbsp;&nbsp;
+  <input type="button" value="確定" onclick="javascript: new Effect.SlideUp($('qanda_form')); $('comment').value='';" />
+<{/if}>
+  <p class="topic_form_bottom"></p>
+</div>
+<{/if}>
+
+<{include file="topic_header.htm"}>
+<div class="topic_view_top">
+  <h1><{$_WikiTopic->title|htmlencode}></h1>
+  <ul>
+    <li<{if ($_WikiPost->pno == $_WikiTopic->currpost->pno && $curruser->haveperm($curruser->p_handler->getpermvalid()))}> onclick="javascript: show_form('comment_form');"<{/if}>>發表評論</li>
+    <li<{if ($_WikiPost->pno == $_WikiTopic->currpost->pno && $curruser->haveperm($curruser->p_handler->getpermvalid()))}> onclick="javascript: show_form('qanda_form');"<{/if}>>發表問題</li>
+  </ul>
+</div>
+<div class="topic_view_field">
+  <div class="topic_view_content" style="font-size: 10pt;"><{$_WikiPost->content()}></div>
+  <div class="topic_view_manage">
+<{if (!$curruser->isguest())}>
+    <a href="javascript: subscribe('topic', '<{$_WikiTopic->tno}>');" title="訂閱主題"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_subscribeicon1.gif" border="0" alt="訂閱主題" /></a><br />
+<{/if}>
+<{if ($_WikiPost->pno != $_WikiTopic->currpost->pno)}>
+    <a href="javascript: document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/view.php?pno=<{$_WikiTopic->currpost->pno}>'" title="目前版本" class="topic_manage">目前版本</a><br />
+<{else}>
+    <a href="javascript: document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/allversion.php?tno=<{$_WikiTopic->tno}>'" title="編修紀錄" class="topic_manage">編修紀錄</a><br />
+<{/if}>
+
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+    <a href="javascript: document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php?newpost=1&pno=<{$_WikiPost->pno}>'" title="編輯" class="topic_manage">編輯</a><br />
+    <a href="javascript: document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php?impeach=1&no=<{$_WikiPost->pno}>'" title="檢舉" class="topic_manage">檢舉</a>
+<{if ($_WikiPost->impeach > 0)}>
+    <img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/warn.gif" border="0" />
+<{/if}>
+<{/if}>
+  </div>
+</div>
+<p class="topic_view_bottom"></p>
+
+<{if ($_WikiPost->pno == $_WikiTopic->currpost->pno)}>
+<style type="text/css">
+#extend_menu
+{
+	margin-top: 10px;
+	border-bottom: 1px solid #C1C1C1;
+	width: 615px;
+	height: 24px;
+}
+
+#extend_menu ul
+{
+	margin: 0px;
+	list-style-type: none;
+	display: inline;
+}
+
+#extend_menu li
+{
+	float: left;
+	margin: 0px;
+	display: block;
+	cursor: pointer;
+	padding: 1px 10px;
+	width: 85px;
+	height: 23px;
+}
+
+#cbutton
+{
+	background: url("<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_extend_menu1.jpg") no-repeat;
+}
+
+#qbutton
+{
+	background: url("<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_extend_menu2.jpg") no-repeat;
+}
+</style>
+
+<script type="text/javascript">
+	function topic_extend(show)
+	{
+		if (show == 1)
+		{
+			$('topic_comment').style.display = 'block';
+			$('topic_qanda').style.display = 'none';
+
+			$('cbutton').style.background = 'url(<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_extend_menu1_2.jpg)';
+			$('qbutton').style.background = 'url(<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_extend_menu2.jpg)';
+		}
+		else
+		{
+			$('topic_comment').style.display = 'none';
+			$('topic_qanda').style.display = 'block';
+
+			$('cbutton').style.background = 'url(<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_extend_menu1.jpg)';
+			$('qbutton').style.background = 'url(<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_extend_menu2_2.jpg)';
+		}
+	}
+</script>
+
+<div id="extend_menu">
+  <ul>
+    <li id="cbutton" onclick="javascript: topic_extend(1)">評論 (<{$numcomment}>)</li>
+    <li id="qbutton" onclick="javascript: topic_extend(2)">問答 (<{$numqanda}>)</li>
+  </ul>
+</div>
+
+<div id="topic_comment" style="margin-left: 10px; display: none; width: 585px;">
+  <table border="0" cellpadding="2" cellspacing="0" style="border-collapse: collapse;" width="100%">
+<{foreach from=$_WikiTopic->comment item="comment"}>
+    <tr>
+      <td style="letter-spacing: 1pt;"><a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$comment.poster_no}>" title=""><{$comment.poster_name|htmlencode}></a>→<{$comment.comment|htmlencode}></td>
+      <td align="right">(<{$comment.posttime}>)
+<{if ($_WikiTopic->ismanager())}>
+<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php?delcomment=1&mno=<{$comment.mno}>" title="刪除">刪除</a>
+<{/if}>
+</td>
+    </tr>
+<{/foreach}>
+  </table>
+</div>
+
+<div id="topic_qanda" style="margin-top: 10px; display: none;">
+<{foreach from=$_WikiTopic->qanda item="qanda"}>
+  <p class="reply_top"></p>
+  <div class="reply_content">
+    <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;" width="100%">
+      <tr>
+        <td><a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$qanda.poster_no}>" title=""><{$qanda.poster_id|htmlencode}> (<{$qanda.poster_name|htmlencode}>)</a> 問：</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 10px; letter-spacing: 1pt;"><font color="#333333"><{$qanda.question|htmlencode|nl2br}></font></td>
+      </tr>
+<{if (!$curruser->isguest())}>
+      <tr>
+        <td align="right">at <{$qanda.posttime}> 
+<{if ($currmodule->isadmin($curruser))}>&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/do_question.php?delques=1&qno=<{$qanda.qno}>" title="刪除問題">刪除問題</a><{/if}>
+<{if (!$curruser->isguest())}>&nbsp;&nbsp;<a href="javascript: subscribe('qanda', '<{$qanda.qno}>');" title="訂閱問題"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_subscribeicon2.jpg" border="0" alt="訂閱問題" /></a><{/if}>
+        </td>
+      </tr>
+<{/if}>
+<{if ($qanda.answer)}>
+      <tr>
+        <td style="border-top: 1px dotted #000000;">[最佳解答]</td>
+      </tr>
+      <tr>
+        <td><a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$qanda.answer.poster_no}>" title=""><{$qanda.answer.poster_id|htmlencode}> (<{$qanda.answer.poster_name|htmlencode}>)</a>答：</td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 10px;"><font color="#333333"><{$qanda.answer.answer|htmlencode|nl2br}></font></td>
+      </tr>
+      <tr>
+        <td>相關主題：
+<{foreach from=$qanda.ref item="ref"}>
+<{if ($ref)}>
+          <a href="<{$currconfig->url}>/module/<{$currmodule->name}>/view.php?title=<{$ref|urlencode}>" title=""><{$ref}></a>
+<{/if}>
+<{/foreach}>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">at <{$qanda.answer.posttime}></td>
+      <tr>
+<{else}>
+      <tr>
+        <td align="right">共有 <{$qanda.numans}> 篇回答&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/question.php?qno=<{$qanda.qno}>" title="">觀看此問題的回答</a>&nbsp;&nbsp;
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+          <a href="javascript: show_qform(<{$qanda.qno}>)" title="回答問題">回答問題</a>
+          <div id="ans_<{$qanda.qno}>" style="display: none">
+            <form method="post" action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_question.php">
+              <textarea name="answer" rows="5" cols="50"></textarea><br />
+              相關主題：<input type="text" name="ref" size="20" /><br />
+              <input type="hidden" name="doanswer" value="1" /><input type="hidden" name="qno" value="<{$qanda.qno}>" /><input type="submit" value="確定" />
+            </form>
+          </div>
+<{/if}>
+        </td>
+      </tr>
+<{/if}>
+    </table>
+  </div>
+  <p class="reply_bottom"></p>
+<{/foreach}>
+</div>
+<{/if}>

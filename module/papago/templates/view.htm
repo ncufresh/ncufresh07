@@ -1,0 +1,17 @@
+<div id="view">
+	<table border="1">
+	<tr>
+		<td>姓名</td>
+		<td>送件時間</td>
+	</tr>
+	<{section name=sec loop=$winner}>
+	<tr>
+		<td><{$winner[sec].id}></td>
+		<td><{$winner[sec].time}></td>
+	</tr>
+	<{/section}>
+	</table>
+</div>
+<{foreach from=$who item="item" key="key"}>
+<p>第<{$key}>位<{$item}>票</p>
+<{/foreach}>

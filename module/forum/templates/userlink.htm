@@ -1,0 +1,3 @@
+<div style="text-align: left">&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/index.php" title="討論區">討論區</a>&nbsp;&raquo;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/viewboard.php?no=<{$forumboard->board_no}>" title="文章列表"><{$forumboard->title}></a></div>
+<{if ($curruser->haveperm($forumboard->perm) || $bm)}><div style="text-align: right"><input type="button" value="發表新文章" onclick="javascript: document.location.href='do_topic.php?dopost=1&bno=<{$forumboard->board_no}>';" /></div><{/if}>
+

@@ -1,0 +1,7 @@
+<{if ($currmodule->isadmin($curruser))}>
+	<p><a href="form.php?action=post">新增公告</a></p>
+<{/if}>
+<{foreach from=$topics item="topic"}>
+<{include file="topic.htm"}>
+<{/foreach}>
+<p><a href="allanno.php?pno=1"><font color="#000000">所有公告列表</font></a></p>

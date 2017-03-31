@@ -1,0 +1,34 @@
+<div style="margin:0px 10px">
+	<div class="post_top" style="color:#333">公告時間：<font style="color:#666"><{$topic.times}></font></div>
+	<div class="post_content" <{if ($select == "index")}>style="height:60pt"<{/if}>>
+
+		<{if ($select == "index")}><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/topic.php?topic_no=<{$topic.topic_no}>" title="<{$topic.title}>" style="text-decoration: none;"><{/if}>
+  		<font style="font-size:12pt; color: #000;"><{if ($topic.top==1)}><font color="#CC0066">[重要]</font>&nbsp;<{/if}><{$topic.title}></font>
+  		<{if ($select == "index")}><img src="templates/images/more.gif" border="0" /></a><{/if}><br />
+		<font style="font-size:10pt"><font style="color:<{if ($select == "topic")}>#333<{else}>#666<{/if}>"><{$topic.content}></font></font>
+			<{if ($select==topic)}>
+				<{if ($topic.file!=null)}>
+					<p>附件：
+					<{foreach from=$file item="item1"}>
+			  			<a href="res/<{$topic.topic_no}>/<{$item1.file_file}>" title="<{$item1.file_file}>">[<{$item1.file_name}>]</a>&nbsp;
+					<{/foreach}>
+					</p>
+				<{/if}>
+				<{if ($topic.go_link==0&&$topic.link)}>
+					<p align="left"><a href="<{$topic.link}>" target="_blank">相關連結</a></p>
+				<{/if}>
+			<{/if}>
+			
+	</div>
+		<{assign var=poster value=$curruser->u_handler->getuserbyno($topic.poster_no)}>
+		<div class="post_bottom">
+		<{if ($select=="index")}>
+			<{if ($currmodule->isadmin($curruser))}>
+				<a href="form.php?topic_no=<{$topic.topic_no}>&action=edit">[EDIT]</a>&nbsp;&nbsp;<a href="delete.php?topic_no=<{$topic.topic_no}>">[DELETE]</a>
+			<{/if}>
+		<{/if}>
+		公告單位：<font style="color:#666"><{$poster->name}></font></div>
+</div>
+<{if ($select=="topic")}>
+	<p><a href="javascript: history.go(-1);"><font color="#000000">回上頁</font></a></p>
+<{/if}>

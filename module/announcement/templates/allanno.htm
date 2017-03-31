@@ -1,0 +1,27 @@
+<div>
+  <div style="float: left;">
+    <{$c_block}>
+    <{$c_block2}>
+  </div>
+  <div style="float: right; width: 420px;">
+    <img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/c_icon_news_4.gif">
+    <div class="allanno">
+<{foreach from=$topics item="item"}>
+      <font style="color:#666666"><{$item.times}></font>&nbsp;&nbsp;<a href="topic.php?topic_no=<{$item.topic_no}>"><{if ($item.top==1)}><font style="color:#C06">[重要]&nbsp;</font><{/if}><{$item.title}>...</a>
+<{if ($currmodule->isadmin($curruser))}>
+      <a href="form.php?topic_no=<{$item.topic_no}>&action=edit">[EDIT]</a>&nbsp;&nbsp;<a href="delete.php?topic_no=<{$item.topic_no}>">[DELETE]</a>
+<{/if}>
+      <br />
+<{/foreach}>
+    </div>
+    Page :
+<{foreach from=$plink item="link"}>
+    <{$link}>&nbsp;&nbsp;
+<{/foreach}>
+<!--
+    <p><a href="index.php"><font color="#000000">回首頁</font></a></p>
+-->
+  </div>
+  <p style="clear: both;"></p>
+</div>
+

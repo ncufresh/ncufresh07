@@ -1,0 +1,40 @@
+<script type="text/javascript">
+	function add_friend2(fid)
+	{
+		var parms = 'add_friend=1&fid=' + fid;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/friendlist_ajax.php", {method: "post", parameters: parms, onComplete: function (q){alert('已加入好友名單');}});
+	}
+</script>
+<p class="field_top">使用者資料</p>
+<div class="field_content">
+  <table border="0" cellpadding="10" cellspacing="0" style="border-collapse: collapse;" width="100%">
+    <tr>
+      <th colspan="5"><{$user->uid}>(<{if ($user->isonline() == 1)}>正在線上<{else}>不在線上<{/if}>)</th>
+    </tr>
+    <tr>
+      <td width="25%">暱稱</td>
+      <td width="25%"><{$user->name}></td>
+      <td colspan="2" align="right" width="50%"><{if (!$curruser->isguest())}><a href="javascript: add_friend2('<{$user->uid}>')" title="加入好友" style="text-decoration: none;"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_friendadd.gif" border="0" /> 加為好友</a>&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/msgsend.php?fno=<{$user->uno}>" title="傳送訊息" style="text-decoration: none;"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_friendmail.gif" border="0" /> 傳送訊息</a><{/if}></td>
+    </tr>
+    <tr>
+      <td width="25%">性別</td>
+      <td width="25%"><{$user->sex}></td>
+      <td width="25%">系所</td>
+      <td width="25%"><{$user->department}></td>
+    </tr>
+    <tr>
+      <td width="25%">首頁</td>
+      <td colspan="3" width="82%"><{if ($user->website)}><a href="http://<{$user->website|htmlencode}>" target="_blank" title="個人首頁">請按我</a><{else}>無<{/if}></td>
+    </tr>
+    <tr>
+      <td width="25%">電子信箱</td>
+      <td colspan="3" width="82%"><{if ($user->email)}><a href="mailto:<{$user->email|htmlencode}>" title="電子信箱"><{$user->email|htmlencode}></a><{else}>無<{/if}></td>
+    </tr>
+    <tr>
+      <td width="25%">自我介紹</td>
+      <td colspan="3" width="82%"><{$user->intro|nl2br}></td>
+    </tr>
+  </table>
+</div>
+<p class="field_bottom"></p>

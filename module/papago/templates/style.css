@@ -1,0 +1,78 @@
+#mupic td a {
+	display: block;
+	text-decoration: none;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+#mupic td.one a {background: url(images/map_2.jpg); width: 50px;height: 95px;}
+#mupic td.one a:hover{background:url(images/area_2.jpg)}
+#mupic td.two a {background: url(images/map_19.jpg); width: 40px;height: 49px;}
+#mupic td.two a:hover{background:url(images/area_19.jpg);}
+#mupic td.three a {background: url(images/map_12.jpg); width: 55px;height: 114px;}
+#mupic td.three a:hover{background:url(images/area_12.jpg);}
+#mupic td.four a {background: url(images/map_11.jpg); width: 100px;height: 65px;}
+#mupic td.four a:hover{background:url(images/area_11.jpg)}
+#mupic td.five a {background: url(images/map_5.jpg); width: 130px;height: 250px;}
+#mupic td.five a:hover{background:url(images/area_5.jpg)}
+#mupic td.six a {background: url(images/map_9.jpg); width: 95px;height: 65px;}
+#mupic td.six a:hover{background:url(images/area_9.jpg)}
+#mupic td.street a {background: url(images/map_17.jpg); width: 15px;height: 49px;}
+#mupic td.street a:hover{background:url(images/area_17.jpg)}
+#mupic td.back a {background: url(images/map_15.jpg); width: 25px;height: 49px;}
+#mupic td.back a:hover{background:url(images/area_15.jpg)}
+
+img {
+	border: 0px;
+}
+
+#box{
+	margin-left: 18pt;
+	margin-top: -380pt;
+	POSITION: absolute;
+	background: #FFF;
+}
+#box input{
+	border: 0pt;
+}
+#box tr td{
+	border: 1px solid;
+}
+
+#box2{
+	margin-top: -394pt;
+	position: absolute;
+	margin-left: 18pt;
+}
+
+#box2 a{
+	color:#399;
+}
+
+#box2 a:hover{
+	color: #399;
+	text-decoration: none;
+}
+
+#view{
+	overflow: scroll;
+	height: 300pt;
+	width: 150pt;
+	margin: 10pt;
+	border: 4px solid #ccc; 
+}
+#qintro{
+	width: 435pt;
+	margin-left: 10pt;
+	margin-top: -10pt;
+	letter-spacing: 1pt;
+	font-family: "新細明體";
+	clear:both;
+	
+}

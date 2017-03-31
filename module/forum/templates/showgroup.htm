@@ -1,0 +1,50 @@
+<script type="text/javascript">
+	function subscribe(type, no)
+	{
+		var parms = 'subscr_' + type + '=1&no=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_subscribe.php", {method: "post", parameters: parms, onComplete: function(q){alert('訂閱成功');}});
+	}
+</script>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+<{foreach from=$forumboard item="board" name="board"}>
+<{if ($smarty.foreach.board.iteration % 2 == 1)}>
+  <tr>
+<{/if}>
+    <td valign="top" width="50%">
+      <table class="groupTable">
+        <tr>
+          <th colspan="3" height="30"><a href="javascript: subscribe('board', <{$board->board_no}>)" title="訂閱看板"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/inner_3.jpg" width="17" border="0" height="14" alt="訂閱看板" /></a><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/viewboard.php?no=<{$board->board_no}>" title="進入看板"><{$board->title}></a></th>
+        </tr>
+        <tr>
+          <td width="15%" height="12" align="center">訂閱</td>
+          <td width="70%" height="12">標題</td>
+          <td width="15%" height="12">篇數</td>
+        </tr>
+<{foreach from=$board->topics item="topic"}>
+        <tr>
+          <td width="15%" height="15" align="center"><a href="javascript: subscribe('topic', <{$topic->topic_no}>)" title="訂閱文章"><img border="0" src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/icon_left4.jpg" width="9" height="8" alt="訂閱文章" /></a></td>
+          <td width="70%" height="15"><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/viewtopic.php?no=<{$topic->topic_no}>" title="<{$topic->title}>"><{$topic->titles}></a></td>
+          <td width="15%" height="15"><{$topic->numreply}></td>
+        </tr>
+<{/foreach}>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="3" align="right" height="15"><input type="button" value="MORE" onclick="javascript: document.location.href='<{$currconfig->url}>/module/<{$currmodule->name}>/viewboard.php?no=<{$board->board_no}>';" />&nbsp;&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+<{if ($smarty.foreach.board.iteration % 2 == 0)}>
+  </tr>
+<{/if}>
+<{/foreach}>
+<{if ($smarty.foreach.board.iteration % 2 == 1)}>
+    <td>a&nbsp;</td>
+  </tr>
+<{/if}>
+</table>

@@ -1,0 +1,23 @@
+<p class="field_top">聯絡我們</p>
+<div class="field_content">
+  <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center" width="100%">
+    <tr>
+      <td width="120">寄件者</td>
+      <td>標題</td>
+      <td width="130">時間</td>
+      <td width="30">刪除</td>
+    </tr>
+<{section name=sec1 loop=$title}>
+    <tr>
+      <td><a href="<{$email[sec1]}>" title="寄信"><{$sender[sec1]}></a></td>
+      <td><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/contact.php?read_contact=1&mno=<{$mno[sec1]}>"><{$title[sec1]}></a></td>
+      <td><{$time[sec1]}></td>
+      <td><a href="<{$currconfig->phpself}>?del_contact=1&mno=<{$mno[sec1]}>" title="刪除">刪除</a></td>
+    </tr>
+<{/section}>
+    <tr>
+      <td colspan="3" align="left">頁數&nbsp;&nbsp;<{foreach from=$p item=pag}><{$pag}>&nbsp;&nbsp;<{/foreach}></td>
+    </tr>
+  </table>
+</div>
+<p class="field_bottom"></p>

@@ -1,0 +1,47 @@
+.field_top
+{
+	margin: 0px;
+	background: url("images/c_field_up.jpg") no-repeat;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px 20px;
+	width: 575px;
+	height: 35px;
+}
+
+.field_content
+{
+	margin: 0px;
+	background: url("images/c_field_bg.jpg") repeat-y;
+	color: #666666;
+	padding: 0px 20px;
+	width: 575px;
+}
+
+.field_content p
+{
+	margin: 0px;
+}
+
+.field_content a
+{
+	color: #666666;
+	text-decoration: underline;
+}
+
+.field_content input, .field_content textarea, .field_content select
+{
+	margin: 2px;
+	border: 1px solid #B5B67A;
+	background: #FFFFFF;
+	color: #666666;
+}
+
+.field_bottom
+{
+	margin: 0px;
+	background: url("images/c_field_down.jpg") no-repeat;
+	padding: 0px 20px;
+	width: 575px;
+	height: 30px;
+}

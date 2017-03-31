@@ -1,0 +1,116 @@
+<script type="text/javascript">
+	var pno = 0;
+
+	function subscribe(type, no)
+	{
+		var parms = 'subscr_' + type + '=1&no=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_subscribe.php", {method: "post", parameters: parms});
+	}
+
+	function rmtopic_result(req)
+	{
+		if (req.responseText == '找不到主題')
+			alert(req.responseText);
+		else
+			document.location.href = '<{$currconfig->url}>/module/<{$currmodule->name}>/viewboard.php?no=<{$forumtopic->board_no}>';
+	}
+
+	function rmtopic(no)
+	{
+		var parms = 'rmtopic=1&tno=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php", {method: "post", parameters: parms, onComplete: rmtopic_result});
+	}
+
+	function rmreply_result(req)
+	{
+		if (req.responseText == '找不到文章')
+			alert(req.responseText);
+		else
+			document.location.href = '<{$currconfig->phpself}>';
+	}
+
+	function rmreply(no)
+	{
+		var parms = 'rmreply=1&rno=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_reply.php", {method: "post", parameters: parms, onComplete: rmreply_result});
+	}
+
+	function show_push(no)
+	{
+		if (pno > 0)
+			$('push_form' + pno).innerHTML = '';
+
+		var str = '';
+		str = str + '<form method="post" action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_push.php" name="do_push" id="do_push">\n';
+		str = str + '<{$curruser->name}>:→ <input type="text" name="content" size="40" />&nbsp;&nbsp;<input type="hidden" name="dopush" value="1" /><input type="hidden" name="rno" value="' + no + '" /><input type="submit" value="確定" />&nbsp;&nbsp;\n';
+		str = str + '</form>\n';
+
+		$('push_form' + no).innerHTML = str;
+
+		pno = no;
+	}
+</script>
+<table class="titleTable">
+  <tr>
+    <td><a href="javascript: subscribe('board', <{$forumboard->board_no}>)" title="訂閱看板">．</a>&nbsp;<{$forumboard->title}>&nbsp;&raquo;</td>
+  </tr>
+</table>
+
+<table class="itemTable">
+  <tr>
+    <th><{$forumtopic->title}>&raquo;</th>
+  </tr>
+  <tr>
+    <td class="itemContent"><{$forumtopic->content}></td>
+  </tr>
+  <tr>
+    <td align="right"><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/topicfeed.php?no=<{$forumtopic->topic_no}>" title="rss"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/feed.jpg" border="0" alt="rss" /></a><{if ($curruser->haveperm($curruser->p_handler->getpermvalid()) && ($forumtopic->poster_no == $curruser->uno || $bm))}>&nbsp;<a href="do_topic.php?mdarticle=1&tno=<{$forumtopic->topic_no}>" title="修改文章">[EDIT]</a><{if ($bm)}>&nbsp;<a href="javascript: rmtopic(<{$forumtopic->topic_no}>);" title="刪除文章">[DEL]</a><{/if}><{/if}>&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="itemFooter">發文者：<a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$forumtopic->poster_no}>" title="使用者資料"><{$forumtopic->poster_name}></a>&nbsp;&nbsp;點閱數：<{$forumtopic->numread}>&nbsp;&nbsp;回應數：<{$forumtopic->numreply}>&nbsp;&nbsp;發表時間：<{$forumtopic->posttime}></td>
+  </tr>
+</table>
+
+<table class="titleTable">
+  <tr>
+    <td>回覆文章&raquo;</td>
+  </tr>
+</table>
+
+<{foreach from=$forumreply item="reply"}>
+
+<table class="itemTable">
+  <tr>
+    <td class="itemContent"><{$reply->content}></td>
+  </tr>
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()) && ($reply->poster_no == $curruser->uno || $bm))}>
+  <tr>
+    <td class="itemAdmin"><a href="do_reply.php?mdreply=1&rno=<{$reply->reply_no}>;" title="修改文章">[EDIT]</a>&nbsp;<a href="javascript: rmreply(<{$reply->reply_no}>);" title="刪除文章">[DEL]</a></td>
+  </tr>
+<{/if}>
+  <tr>
+    <td class="itemFooter">發文者：<a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$reply->poster_no}>" title="使用者資料"><{$reply->poster_name}></a>&nbsp;&nbsp;發表時間：<{$reply->posttime}></td>
+  </tr>
+<{foreach from=$reply->push item="push"}>
+  <tr>
+    <td><a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$push->poster_no}>" title="使用者資料"><{$push->poster_name}></a>:→ <{$push->content}></td>
+  </tr>
+<{/foreach}>
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+  <tr>
+    <td><input type="button" value="我要推文" onclick="javascript: show_push(<{$reply->reply_no}>)" /><div id="push_form<{$reply->reply_no}>"></div></td>
+  </tr>
+<{/if}>
+</table>
+<{/foreach}>
+
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+<{include file="reply_form.htm"}>
+<{/if}>
+<div style="text-align: center;"><{foreach from=$plink item="link"}><{$link}>&nbsp;&nbsp;<{/foreach}></div>
+<div style="text-align: center;"><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/viewboard.php?no=<{$forumtopic->board_no}>">回看板</a></div>
+
+

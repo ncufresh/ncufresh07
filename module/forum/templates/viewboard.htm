@@ -1,0 +1,59 @@
+<script type="text/javascript">
+	function subscribe(type, no)
+	{
+		var parms = '&subscr_' + type + '=1&no=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_subscribe.php", {method: "post", parameters: parms, onComplete: function(q){alert('訂閱成功');}});
+	}
+
+	function rmtopic_result(req)
+	{
+		if (req.responseText == '找不到主題')
+			alert(req.responseText);
+		else
+			document.location.href = '<{$currconfig->phpself}>';
+	}
+
+	function rmtopic(no)
+	{
+		var parms = 'rmtopic=1&tno=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php", {method: "post", parameters: parms, onComplete: rmtopic_result});
+	}
+
+	function toptopic(no)
+	{
+		var parms = 'toptopic=1&tno=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_top.php", {method: "post", parameters: parms, onComplete: function(q){document.location.href = '<{$currconfig->phpself}>';}});
+	}
+</script>
+
+<table class="titleTable">
+  <tr>
+    <td><a href="javascript: subscribe('board', <{$forumboard->board_no}>)" title="訂閱看板">．</a>&nbsp;<{$forumboard->title}>&nbsp;&raquo;</td>
+  </tr>
+</table>
+
+<{foreach from=$forumtopic item="topic"}>
+<table class="itemTable">
+  <tr>
+    <th><a href="javascript: subscribe('topic', <{$topic->topic_no}>)" title="訂閱文章">•</a><a href="viewtopic.php?no=<{$topic->topic_no}>"><{$topic->title}>&raquo;</a></th>
+  </tr>
+  <tr>
+    <td class="itemContent"><{$topic->content}>....(<a href="viewtopic.php?no=<{$topic->topic_no}>">詳全文</a>)</td>
+  </tr>
+<{if ($poster->uno == $curruser->uno || $bm)}>
+  <tr>
+    <td class="itemAdmin"><a href="do_topic.php?mdarticle=1&tno=<{$topic->topic_no}>" title="修改文章">[EDIT]</a><{if ($bm)}><a href="javascript: toptopic(<{$topic->topic_no}>);" title="文章置頂">[SET TOP]</a>&nbsp;<a href="javascript: rmtopic(<{$topic->topic_no}>);" title="刪除文章">[DEL]</a><{/if}>&nbsp;</td>
+  </tr>
+<{/if}>
+  <tr>
+    <td class="itemFooter">發文者：<a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$topic->poster_no}>" title="使用者資料"><{$topic->poster_name}></a>&nbsp;&nbsp;點閱數：<{$topic->numread}>&nbsp;&nbsp;回應數：<{$topic->numreply}>&nbsp;&nbsp;<br />發表時間：<{$topic->posttime}>&nbsp;&nbsp;最後時間：<{$topic->lasttime}></td>
+  </tr>
+</table>
+<{/foreach}>
+<div style="text-align: center;"><{foreach from=$plink item="link"}><{$link}>&nbsp;&nbsp;<{/foreach}></div>
+<p></p>
+<div style="text-align: center;"><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/index.php">回討論區</a></div>
+

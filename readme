@@ -1,0 +1,6 @@
+site_name		網頁標題
+session_name		session name
+session_expire		session expire
+openreg			是否開放註冊
+
+set_config.htm 為寫死的，如有增加 config 需修改此檔案

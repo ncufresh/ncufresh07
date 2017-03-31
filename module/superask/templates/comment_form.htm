@@ -1,0 +1,16 @@
+<div id="comment_form" style="display: none;">
+  <form action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_topic.php" method="post">
+    <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+      <tr>
+        <th>發表評論</th>
+      </tr>
+      <tr>
+        <td><textarea name="comment" rows="10" cols="10"></textarea>
+      </tr>
+      <tr>
+        <td><input type="hidden" name="docomment" value="1" /><input type="submit" value="送出" />&nbsp;<input type="button" value="取消" onclick=
+"new Effect.SlideUP($('comment_form'));" /></td>
+      </tr>
+    </table>
+  </form>
+</div>

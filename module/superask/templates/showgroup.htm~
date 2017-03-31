@@ -1,0 +1,20 @@
+<div>
+<{foreach from=$category item="item"}>
+  <a href="<{$currconfig->url}>/module/<{$currmodule->name}>/showgroup.php?cno=<{$item.cno}>" title="<{$item.name|htmlencode}>"><{$item.name|htmlencode}></a>&nbsp;&nbsp;
+<{/foreach}>
+</div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<div>
+<{foreach from=$topics item="item"}>
+<div class="category">
+  <div class="category_top"><h1>
+<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/view.php?title=<{$item.title|urlencode}>" title="<{$item.title}>"><{$item.title|htmlencode}></a>
+</h1></div>
+</div>
+<{/foreach}>
+</div>

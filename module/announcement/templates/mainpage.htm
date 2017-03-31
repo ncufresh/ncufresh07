@@ -1,0 +1,16 @@
+<div>
+  <div style="float: left;">
+    <{$c_block}>
+    <{$c_block2}>
+  </div>
+  <div style="float: right; width: 420px;">
+<{if ($currmodule->isadmin($curruser))}>
+    <p><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/form.php?action=post" title="新增公告"><font color="#000000">新增公告</font></a></p>
+<{/if}>
+<{foreach from=$topics item="topic"}>
+<{include file="topic.htm"}>
+<{/foreach}>
+    <p><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/allanno.php?pno=1" title="公告列表"><font color="#000000">所有公告列表</font></a></p>    
+  </div>
+  <p style="clear: both;"></p>
+</div>

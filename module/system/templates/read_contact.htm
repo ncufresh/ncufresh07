@@ -1,0 +1,21 @@
+<p class="field_top">聯絡我們</p>
+<div class="field_content">
+  <table border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse" align="center" width="500">
+    <tr>
+      <th colspan="2" style="font-size:18px; "><{$title}></th>
+    </tr>
+    <tr>
+      <td>姓名：<a href="<{$email}>" title="回覆"><{$sender}></a></td>
+      <td align="right">ip:<{$ip}></td>
+    </tr>
+    <tr>
+      <td colspan="2"><{$content}></td>
+    </tr>
+    <tr>
+      <td align="left"><a href="javascript: window.back();" title="上一頁">回到上頁</a>&nbsp;&nbsp;
+<a href="<{$currconfig->phpself}>?del_contact=1&mno=<{$mno}>" title="刪除留言">刪除</a></td>
+      <td colspan="2" align="right">時間:<{$time}></td>
+    </tr>
+  </table>
+</div>
+<p class="field_bottom"></p>

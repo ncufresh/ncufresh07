@@ -1,0 +1,298 @@
+.top
+{
+	background: url("images/top.gif") no-repeat;
+	width: 605px;
+	height: 40px;
+}
+
+.middle
+{
+	background: url("images/middle.gif") repeat-y;
+	padding: 0px 40px;
+	width: 525px;
+	height: 600px;
+}
+
+.bottom
+{
+	background: url("images/bottom.gif") no-repeat;
+	width: 605px;
+	height: 40px;
+}
+
+.title
+{
+	margin: 0px auto;
+	background: url("images/title.gif") no-repeat;
+	width: 140px;
+	height: 140px;
+}
+
+.left
+{
+	float: left;
+	width: 220px;
+}
+
+#user_table
+{
+	margin-left: 0px;
+}
+
+.right
+{
+	float: right;
+	width: 300px;
+}
+
+#schedule
+{
+	border-bottom: 1px dotted #f5f5f5;
+	border-collapse: collapse;
+	margin-right: 0px;
+	font-size: 15px;
+}
+
+#schedule td
+{
+	border-bottom:1px dotted #f5f5f5;
+}
+
+#schedule_title
+{
+	cursor: pointer;
+}
+
+.ps
+{
+	clear: both;
+	width: 525px;
+	height: 40px;
+}
+
+#man_pic0
+{
+	background: url("images/man/user0.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#man_pic1
+{
+	background: url("images/man/user1.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#man_pic2
+{
+	background: url("images/man/user2.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#man_pic3
+{
+	background: url("images/man/user3.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#man_pic4
+{
+	background: url("images/man/user4.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#man_pic5
+{
+	background: url("images/man/user5.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#man_pic_1
+{
+	background: url("images/man/user_1.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 2;
+}
+
+#man_pic_2
+{
+	background: url("images/man/user_2.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 3;
+}
+
+#man_pic_3
+{
+	background: url("images/man/user_3.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 4;
+}
+
+#man_pic_4
+{
+	background: url("images/man/user_4.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 5;
+}
+
+#man_pic_5
+{
+	background: url("images/man/user_5.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 6;
+}
+
+#woman_pic0
+{
+	background: url("images/woman/user0.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#woman_pic1
+{
+	background: url("images/woman/user1.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#woman_pic2
+{
+	background: url("images/woman/user2.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#woman_pic3
+{
+	background: url("images/woman/user3.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#woman_pic4
+{
+	background: url("images/woman/user4.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#woman_pic5
+{
+	background: url("images/woman/user5.gif") no-repeat;
+	width: 197px;
+	height: 276px;
+	z-index: 1;
+}
+
+#woman_pic_1
+{
+	background: url("images/woman/user_1.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 2;
+}
+
+#woman_pic_2
+{
+	background: url("images/woman/user_2.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 3;
+}
+
+#woman_pic_3
+{
+	background: url("images/woman/user_3.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 4;
+}
+
+#woman_pic_4
+{
+	background: url("images/woman/user_4.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 5;
+}
+
+#woman_pic_5
+{
+	background: url("images/woman/user_5.gif") no-repeat;
+	margin-top: -276px;
+	margin-left: 0px;
+	width: 197px;
+	height: 276px;
+	z-index: 6;
+}
+
+.detail_top
+{
+	background: url("images/detail_top.gif") no-repeat;
+	width: 615px;
+	height: 40px;
+}
+
+.detail_middle
+{
+	background: url("images/detail_middle.gif") repeat-y;
+	width: 615px;
+	height: 100%;
+}
+
+.detail_middle:after
+{
+	content: "";
+}
+
+.detail_bottom
+{
+	background: url("images/detail_bottom.gif") no-repeat;
+	width: 615px;
+	height: 40px;
+}
+
+#detail_table td
+{
+	text-align: left;
+}

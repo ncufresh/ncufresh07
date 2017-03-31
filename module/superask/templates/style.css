@@ -1,0 +1,294 @@
+.category_b_top
+{
+	margin: 0px;
+	background: url("images/p_main3_1.jpg") no-repeat;
+	overflow: hidden;
+	width: 400px;
+	height: 45px;
+}
+
+.category_b_top h1
+{
+	float: left;
+	margin-top: 23px;
+	margin-left: 30px;
+	margin-bottom: 0px;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.category_b_top h1 a
+{
+	color: #000000;
+}
+
+.category_b_content
+{
+	clear: both;
+	margin: 0px;
+	background: url("images/p_main3_2.jpg") no-repeat;
+	color: #666666;
+	font-size: 12px;
+	padding: 10px;
+	width: 380px;
+	height: 110px;
+}
+
+.topic_view_top
+{
+	margin: 0px;
+	background: url("images/c_infomain_1.jpg") no-repeat;
+	width: 610px;
+	height: 70px;
+}
+
+.topic_view_top h1
+{
+	float: left;
+	position: absolute;
+	margin: 0px;
+	padding-top: 20px;
+	padding-left: 20px;
+	font-size: 16px;
+	overflow: hidden;
+	width: 270px;
+	height: 50px;
+}
+
+.topic_view_top ul
+{
+	float: right;
+	margin: 0px;
+	padding-top: 15px;
+	padding-right: 85px;
+}
+
+.topic_view_top li
+{
+	float: left;
+	display: block;
+	cursor: pointer;
+	text-indent: -5000px;
+	list-style-type: none;
+	width: 100px;
+	height: 55px;
+}
+
+.topic_view_field
+{
+	margin: 0px;
+	background: url("images/c_infomain_bg.jpg") repeat-y;
+	width: 610px;
+	height: 100%;
+}
+
+.topic_view_field:after
+{
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.topic_view_content
+{
+	float: left;
+	margin-left: 20px;
+	font-size: 10pt;
+	letter-spacing: 1pt;
+	overflow: hidden;
+	width: 425px;
+}
+
+.topic_view_content h1
+{
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.topic_view_manage
+{
+	float: right;
+	margin: 0px;
+	background: url("images/c_infomain_2.jpg") no-repeat;
+	line-height: 20px;
+	padding: 10px 20px;
+	overflow: hidden;
+	width: 105px;
+	height: 80px;
+}
+
+.topic_manage
+{
+	margin: 5px;
+	color: #666666;
+	font-size: 13px;
+	text-decoration: underline;
+}
+
+
+.topic_view_bottom
+{
+	clear: both;
+	margin: 0px;
+	background: url("images/c_infomain_3.jpg") no-repeat;
+	width: 610px;
+	height: 37px;
+}
+
+#comment_form, #qanda_form
+{
+	position: fixed !important;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 300px;
+	background: url("images/p_comment_bg.gif") no-repeat;
+	padding: 15px;
+	width: 220px;
+}
+
+#comment_form input, #qanda_form input
+{
+	margin-top: 10px;
+	margin-left: 1px;
+	border: none;
+}
+
+#comment_form textarea, #qanda_form textarea
+{
+	border: none;
+}
+
+.topic_form_bottom
+{
+	margin: 0px;
+	margin-left: -15px;
+	margin-bottom: -15px;
+	background: url("images/p_comment_bottom.gif") no-repeat;
+	width: 250px;
+	height: 10px;
+}
+
+.reply_top
+{
+	margin: 0px;
+	background: url("images/c_forumreply_top.jpg") no-repeat;
+	overflow: hidden;
+	width: 615px;
+	height: 15px;
+}
+
+.reply_content
+{
+	margin: 0px;
+	background: url("images/c_forumreply_bg.jpg") repeat-y;
+	font-size: 10pt;
+	padding: 0px 10px;
+	width: 595px;
+}
+
+#topic_comment a, #topic_qanda a
+{
+	color: #006699;
+}
+
+.reply_bottom
+{
+	margin: 0px;
+	margin-bottom: 10px;
+	background: url("images/c_forumreply_bottom.jpg") no-repeat;
+	width: 615px;
+	height: 25px;
+}
+
+.field2_top
+{
+	margin: 0px;
+	background: url("images/c_field2_up.jpg") no-repeat;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px 20px;
+	width: 575px;
+	height: 35px;
+}
+
+.field2_content
+{
+	margin: 0px;
+	background: url("images/c_field2_bg.jpg") repeat-y;
+	color: #000000;
+	padding: 0px 20px;
+	width: 575px;
+}
+
+.field2_content p
+{
+	margin: 0px;
+}
+
+.field2_content a
+{
+	color: #000000;
+	text-decoration: underline;
+}
+
+.field2_content input, #field2_content textarea, #field2_content select
+{
+	margin: 1px;
+	border: 1px solid #000000;
+	color: #000000;
+}
+
+.field2_bottom
+{
+	margin: 0px;
+	background: url("images/c_field2_down.jpg") no-repeat;
+	padding: 0px 20px;
+	width: 575px;
+	height: 30px;
+}
+
+#cats_bg
+{
+	background: url("images/c_menu_bgs.jpg") repeat-y;
+	width: 620px;
+	height: 100%;
+}
+
+#cats_bg:after
+{
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.hr_line
+{
+	margin: 5px auto;
+	background: url("images/line.gif") no-repeat;
+	width: 410px;
+	height: 22px;
+}
+
+.block_top_content
+{
+	margin: 0px;
+	background: url("images/c_top_bg.jpg") repeat-y;
+	padding: 0px 2px;
+	overflow: hidden;
+	width: 200px;
+}
+
+.block_top_content a
+{
+	color: #666666;
+	text-decoration: none;
+}
+
+.block_top_bottom
+{
+	margin: 0px;
+	background: url("images/c_top1_down.jpg") repeat-y;
+	overflow: hidden;
+	width: 204px;
+	height: 34px;
+}

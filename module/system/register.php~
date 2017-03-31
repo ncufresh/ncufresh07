@@ -1,0 +1,96 @@
+<?
+require_once("../../mainfile.php");
+
+if ($currconfig->openreg && $curruser->isguest())
+{
+	if (isset($_POST["register_user"]))
+	{
+		$user = new User();
+
+		$user = $user->u_handler->getuserbyid($_POST["uid"]);
+
+		$chk = true;
+
+		if ($user->uno > 0)
+		{
+			$chk = false;
+			echo "此帳號已有人使用&nbsp;&nbsp;";
+		}
+
+		if (strlen($_POST["pwd"]) < 6)
+		{
+			$chk = false;
+			echo "密碼長度需大於 6 個字元&nbsp;&nbsp;";
+		}
+
+		if ($_POST["pwd"] != $_POST["pwd_i"])
+		{
+			$chk = false;
+			echo "密碼錯誤&nbsp;&nbsp;";
+		}
+
+		if (empty($_POST["realname"]) || empty($_POST["name"]) || empty($_POST["sex"]) || empty($_POST["department"]))
+		{
+			$chk = false;
+			echo "請檢查必填欄位&nbsp;&nbsp;";
+		}
+
+		if ($chk)
+		{
+			$user->u_handler->registeruser($_POST["uid"], md5($_POST["pwd"]));
+			$user = $user->u_handler->getuserbyid($_POST["uid"]);
+
+			$criteria = new CriteriaCompo(new Criteria("name", htmlencode($_POST["name"])));
+			$criteria->add(new Criteria("realname", htmlencode($_POST["realname"])));
+			$criteria->add(new Criteria("name", htmlencode($_POST["name"])));
+			$criteria->add(new Criteria("sex", ($_POST["sex"] == "boy") ? "男" : "女"));
+			$criteria->add(new Criteria("department",  htmlencode($_POST["department"])));
+			$criteria->add(new Criteria("website", str_replace("http://", "", htmlencode($_POST["website"]))));
+			$criteria->add(new Criteria("email", (!empty($_POST["email"]) && strpos($_POST["email"], "@") > 0) ? htmlencode($_POST["email"]) : ""));
+			$criteria->add(new Criteria("intro", htmlencode($_POST["intro"])));
+
+			$user->u_handler->modifyuser($user->uno, $criteria);
+
+			$_SESSION["user_uno"] = $user->uno;
+			$_SESSION["user_name"] = $user->name;
+			$_SESSION["user_uid"] = $user->uid;
+			$_SESSION["user_pwd"] = $user->pwd;
+
+			echo "註冊成功&nbsp;&nbsp;";
+
+			if (!empty($_POST["sid"]) && !empty($_POST["spwd"]))
+			{
+				require_once(ROOT_PATH."/module/".$currmodule->name."/include/pop3.class.php");
+				require_once(ROOT_PATH."/module/".$currmodule->name."/include/WebService.class.php");
+
+				$ws = new WebService();
+
+				if ($ws->isPasswordValid($_POST["sid"], $_POST["spwd"]))
+				{
+					$criteria = new CriteriaCompo(new Criteria("sid", $_POST["sid"]));
+					$user->u_handler->modifyuser($user->uno, $criteria);
+
+					$user->u_handler->activeuser($user->uno);
+					echo "sparc 確認成功&nbsp;&nbsp;";
+				}
+				else
+					echo "sparc 確認失敗&nbsp;&nbsp;";
+			}
+			else
+				echo "sparc 未確認";
+		}
+		else
+			echo "<br /><a href=\"javascript: history.go(-1);\" title=\"回上一頁\">回上一頁</a>";
+	}
+	else
+	{
+		require_once(ROOT_PATH."/dep.php");
+
+		$currtpl->assign("dep", $dep);
+
+		$currtpl->display("register.htm");
+	}
+}
+else
+	_redirect();
+?>

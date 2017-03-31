@@ -1,0 +1,37 @@
+<{if ($curruser->isguest())}>
+<style type="text/css">
+#block_login
+{
+	background: url("<{$currconfig->url}>/templates/images/block_bg.jpg") repeat;
+	padding: 10px;
+	letter-spacing: 1px;
+	text-align: left;
+	width: 150px;
+	height: 160px;
+}
+
+#block_login_form
+{
+	margin-top: 20px;
+	margin-right: 10px;
+	text-align: right;
+}
+
+#block_login_form input
+{
+	background: #FFFFFF;
+}
+</style>
+
+<div id="block_login">
+  <img src="<{$block.dirname}>/templates/images/p_loginicon.gif" alt="" />
+  <form method="post" action="<{$currconfig->url}>/include/user.php" id="block_login_form">
+    <label class="id" for="login_id">ID</label> <input type="text" id="login_id" name="id" size="10" /><br /><br />
+    <label class="pwd" for="login_pwd">PWD</label> <input type="password" id="login_pwd" name="pwd" size="10" /><br /><br />
+    <input type="hidden" name="user_login" value="1" /><input type="submit" value="登入" />
+<{if ($currconfig->openreg == 1)}>
+&nbsp;&nbsp;<input type="button" value="註冊" onclick="javascript: document.location.href='<{$block.dirname}>/register.php';" />
+<{/if}>
+  </form>
+</div>
+<{/if}>

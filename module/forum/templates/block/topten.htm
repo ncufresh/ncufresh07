@@ -1,0 +1,12 @@
+<table class="blockTable">
+  <tr>
+    <th colspan="2"><{$block.desc}></th>
+  </tr>
+<{foreach from=$block.topten item="topic"}>
+  <tr>
+    <td align="right" width="10%"><{$topic.no}></td>
+    <td width="90%"><a href="<{$block.dirname}>/viewtopic.php?no=<{$topic.topic_no}>" title="<{$topic.title|htmlencode}>"><{$topic.titles|htmlencode}>&nbsp;(<{$topic.num}>)</a></td>
+  </tr>
+<{/foreach}>
+</table>
+

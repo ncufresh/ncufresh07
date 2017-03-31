@@ -1,0 +1,14 @@
+<{foreach from=$block.ann item="topic"}>
+<div style="margin:0px 10px">
+	<div class="post_top" style="color:#333">公告時間：<font style="color:#666"><{$topic.times}></font></div>
+	<div class="post_content">
+  		<font style="font-size:12pt"><{if ($topic.top==1)}><font style="color:#C06">[重要]&nbsp;</font><{/if}><{$topic.title}></font><br />
+  		<font style="font-size:10pt"><font style="color:#666"><{$topic.content}></font> 
+		<{if ($currmodule->isadmin($curruser))}>
+			<p align="left"><a href="form.php?topic_no=<{$topic.topic_no}>&action=edit">[EDIT]</a>&nbsp;&nbsp;<a href="delete.php?topic_no=<{$topic.topic_no}>">[DELETE]</a></p>
+		<{/if}>
+	</div>
+	<{assign var=poster value=$curruser->u_hansdler->getuerbyno($topic.poster_no)}>
+	<p class="post_bottom" style="color:#333">公告單位：<font style="color:#666"><{$poster->name}></font></p>
+</div>
+<{/foreach}>

@@ -1,0 +1,26 @@
+<?
+if (!defined("MAINFILE_INCLUDED"))
+	exit();
+
+function main_menu($dirname = null)
+{
+	$result = $GLOBALS["currdb"]->query("SELECT * FROM `".$GLOBALS["currdb"]->prefix("module")."` WHERE showlink='".$GLOBALS["currmodule"]->m_handler->showlink."' and active=1");
+
+	for ($i = 0;$tmp = $GLOBALS["currdb"]->fetch_array($result);$i++)
+	{
+//		$module = $GLOBALS["currmodule"]->m_handler->getmodulebyno($tmp["mno"]);
+
+//		if (!$module->isactive())
+//		{
+//			$i--;
+//			continue;
+//		}
+
+		$block["menu"][$i]["desc"] = $module->title;
+		$block["menu"][$i]["icon"] = $GLOBALS["currconfig"]->url."/module/".$module->name."/templates/images/".$module->icon;
+		$block["menu"][$i]["link"] = URL."/module/".$module->name;
+	}
+
+	return $block;
+}
+?>

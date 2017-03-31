@@ -1,0 +1,29 @@
+#qbox input{
+	border: 0pt;
+}
+#qbox tr td{
+	border: 1px dotted;
+	padding: 3pt; 
+}
+#qbox th{
+	border: 1px dotted;
+	padding: 3pt;
+	text-align: left; 
+}
+#qbox{
+	margin: 5pt;
+	letter-spacing: 1pt;
+	font-family: "新細明體";
+	border: 3px solid #FFCC99;
+}
+}
+#q_other{
+	overflow: scroll;
+	height: 60pt;
+	width: 300pt;
+}
+#q_content{
+	overflow: scroll;
+	height: 240pt;
+	width: 400pt;
+}

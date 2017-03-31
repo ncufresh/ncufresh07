@@ -1,0 +1,68 @@
+<div>
+	<form method="post" action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_edit.php?topic_no=<{$topic.topic_no}>" enctype="multipart/form-data">
+		<table border="1">
+			<tr>
+				<td colspan="2">修改公告</td>
+			</tr>
+			<tr>
+				<td valign="top">公告分類</td>
+				<td align="left">
+					<select name="tag[]" size="3" multiple>
+					<{foreach from=$tag item="item"}>
+						<{if ($topic.tag % $item.tag_no==0)}>
+							<option selected value="<{$item.tag_no}>"><{$item.title}></option>
+						<{else}>
+							<option value="<{$item.tag_no}>"><{$item.title}></option>
+						<{/if}>
+					<{/foreach}>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>置頂與否</td>
+				<{if ($topic.top==1)}>
+					<td align="left"><input type="radio" name="top" value="1" checked>是<input type="radio" name="top" value"0">否</td>
+				<{else}>
+					<td align="left"><input type="radio" name="top" value="1">是<input type="radio" name="top" value"0" checked>否</td>
+				<{/if}>
+			<tr>
+				<td>公告主題</td>
+				<td align="left"><input type="title" name="title" size="50" value="<{$topic.title}>"></td>
+			</tr>
+			<tr>
+				<td valign="top">公告內容</td>
+				<td><textarea name="content" cols="60" rows="20"><{$topic.content}></textarea></td>
+			</tr>
+			<tr>
+				<td>相關連結</td>
+				<td align="left"><input type="title" name="link" size="70" value="<{$topic.link}>"></td>
+			</tr>
+			<tr>
+				<td>是否直接連結</td>
+				<{if ($topic.go_link==1)}>
+					<td align="left"><input type="radio" name="go_link" value="1" checked>是<input type="radio" name="go_link" value"0">否</td>
+				<{else}>
+					<td align="left"><input type="radio" name="go_link" value="1">是<input type="radio" name="go_link" value"0" checked>否</td>
+				<{/if}>
+			</tr>
+			<{if ($topic.file!=null)}>
+				<tr>
+					<td>附加檔案</td>
+					<td>
+						<{foreach from=$file item="item"}>
+							<a href="res/<{$topic.topic_no}>/<{$item.file_file}>" title="<{$item.file_file}>">[<{$item.file_name}>]</a>&nbsp;<a href="file.php?topic_no=<{$topic.topic_no}>&fno=<{$item.fno}>&action=delete">delete</a>&nbsp;&nbsp;
+						<{/foreach}>
+					</td>
+				</tr>
+			<{/if}>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" onclick="javascript: location.href = 'file.php?topic_no=<{$topic.topic_no}>&action=file';" value="夾帶檔案" />
+					<input type="submit" value="送出" />
+					<input type="reset" value="重填" />
+					<input type="button" onclick="javascript: location.href = 'index.php';" value="放棄修改" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>

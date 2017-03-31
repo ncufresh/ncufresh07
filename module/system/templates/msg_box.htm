@@ -1,0 +1,28 @@
+<style type="text/css">
+.field_content a
+{
+	text-decoration: none;
+}
+</style>
+
+<p class="field_top"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_mailicon.jpg" alt="傳訊息" /></p>
+<div class="field_content">
+  <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse" align="center" width="100%">
+    <tr>
+      <td><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/msgsend.php" title="傳送訊息"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/icon_send.gif" border="0" alt="傳送訊息" />
+<font color="#996600">傳送訊息</font></a></td>
+      <td colspan="2" align="right">共有 <{$num}> 封</td>
+    </tr>
+<{section name="sec1" loop=$title}>
+    <tr>
+      <td width="150"><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/show_pfile.php?uno=<{$sender_no[sec1]}>" title="使用者資料"><{$sender_id[sec1]}></a></td>
+      <td width="250"><a href="<{$currconfig->url}>/module/<{$currmodule->name}>/msgbox_do.php?msgread=1&mno=<{$mno[sec1]}>" title="閱讀訊息"><{if ($status[sec1] == 2)}><b><{$title[sec1]}></b><{else}><{$title[sec1]}><{/if}></a></td>
+      <td align="right"><{$time[sec1]}></td>
+    </tr>
+<{/section}>
+    <tr>
+      <td colspan="3" align="right">頁數&nbsp;&nbsp;<{foreach from=$p item="pag"}><{$pag}>&nbsp;&nbsp;<{/foreach}></td>
+    </tr>
+  </table>
+</div>
+<p class="field_bottom"></p>

@@ -1,0 +1,82 @@
+<script type="text/javascript">
+<{if (!$curruser->isguest())}>
+	function subscribe(type, no)
+	{
+		var parms = 'subscr_' + type + '=1&no=' + no;
+
+		var req = new Ajax.Request("<{$currconfig->url}>/module/<{$currmodule->name}>/do_subscribe.php", {method: "post", parameters: parms, onComplete: function(q){alert('訂閱成功');}});
+	}
+<{/if}>
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+	qi = 0;
+
+	function show_qandaform(id)
+	{
+		if (qi > 0)
+			$('qandaform_' + qi).style.display = 'none';
+
+		$('qandaform_' + id).style.display = 'block';
+
+		qi = id;
+	}
+<{/if}>
+</script>
+<{foreach from=$question item="qitem"}>
+<p class="reply_top"></p>
+<div class="reply_content">
+  <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;" width="100%">
+    <tr>
+      <td><a href="<{$currconfig->url}>/module/system/show_pfile.php?uno=<{$qitem.poster_no}>" title=""><{$qitem.poster_id|htmlencode}> (<{$qitem.poster_name|htmlencode}>)</a> 問：</td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 10px; letter-spacing: 1pt;"><font color="#333333"><{$qitem.question|htmlencode|nl2br}></font></td>
+    </tr>
+      <tr>
+        <td>相關主題：
+<{foreach from=$qitem.ref item="ref"}>
+<{if ($ref)}>
+          <a href="<{$currconfig->url}>/module/<{$currmodule->name}>/view.php?title=<{$ref|urlencode}>" title=""><{$ref}></a>
+<{/if}>
+<{/foreach}>
+        </td>
+      </tr>
+    <tr>
+      <td align="right">at <{$qitem.posttime}>
+<{if ($currmodule->isadmin($curruser))}>&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/do_question.php?delques=1&qno=<{$qitem.qno}>" title="刪除問題">刪除問題</a><{/if}>
+<{if (!$curruser->isguest())}>&nbsp;&nbsp;<a href="javascript: subscribe('qanda', '<{$qitem.qno}>');" title="訂閱問題"><img src="<{$currconfig->url}>/module/<{$currmodule->name}>/templates/images/p_subscribeicon2.jpg" border="0" alt="訂閱問題" /></a><{/if}>
+</td>
+    </tr>
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+    <tr>
+      <td style="border-top: 1px dotted #000000;">
+共有 <{$qitem.numans}> 篇回答&nbsp;&nbsp;<a href="<{$currconfig->url}>/module/<{$currmodule->name}>/question.php?qno=<{$qitem.qno}>" title="">觀看此問題的回答</a>
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+&nbsp;&nbsp;<a href="javascript: show_qandaform(<{$qitem.qno}>);" title="回答問題">回答問題</a>
+<{/if}>
+</td>
+    </tr>
+<{if ($curruser->haveperm($curruser->p_handler->getpermvalid()))}>
+    <tr>
+      <td align="right">
+        <form id="qandaform_<{$qitem.qno}>" method="post" action="<{$currconfig->url}>/module/<{$currmodule->name}>/do_question.php" style="display: none;">
+          <textarea name="answer" rows="5" cols="50"></textarea><br />
+          相關主題：<input type="text" name="ref" size="20" /><br />
+          <input type="hidden" name="doanswer" value="1" /><input type="hidden" name="qno" value="<{$qitem.qno}>" /><input type="submit" value="確定" />
+        </form>
+      </td>
+    </tr>
+<{/if}>
+<{/if}>
+  </table>
+</div>
+<p class="reply_bottom"></p>
+<{/foreach}>
+<div>
+  <table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;" align="center">
+    <tr>
+<{foreach from=$plink item="pitem"}>
+      <td><{$pitem}></td>
+<{/foreach}>
+    </tr>
+  </table>
+</div>

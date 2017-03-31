@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	function show_msg_status(req)
+	{
+		var msg_num = req.responseText;
+
+		var status = (msg_num > 0) ? '<a href="<{$block.dirname}>/msgbox.php" title="訊息信箱">您有 ' + msg_num + ' 封新訊息</a>' : '您沒有新訊息';
+
+		$('msg_status').innerHTML = status;
+	}
+
+	function get_msg_status()
+	{
+		var parms = "";
+
+		var req = new Ajax.Request("<{$block.dirname}>/block/chkmsg_ajax.php", {method: "get", parameters: parms, onComplete: show_msg_status});
+
+		setTimeout(get_msg_status, 15 * 1000);
+	}
+
+	get_msg_status();
+</script>
+      <td width="100%" colspan="2" style="text-align: center" valign="bottom"><div id="msg_status"></div></td>
+
